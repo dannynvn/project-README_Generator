@@ -7,28 +7,33 @@ const questions = [
     {
         type: 'input',
         message: 'test question 1',
-        name: '',
+        name: 'title',
     },
     {
         type: 'input',
         message: 'question 2',
-        name: '',
+        name: 'description',
     },
     {
         type: 'input',
         message: 'question 3',
-        name: '',
+        name: 'toc',
     },
     {
         type: 'input',
         message: 'question 4',
-        name: '',
+        name: 'installation',
     },
     {
         type: 'input',
         message: 'question 5',
-        name: '',
-    }
+        name: 'usage',
+    },
+    {
+        type: 'input',
+        message: 'question 6',
+        name: 'credits',
+    },
     {
         type: 'list',
         message: 'question 6',
