@@ -1,6 +1,7 @@
 //packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 //array of all licensing options
 const licenses = ['NO LICENSE',
@@ -85,29 +86,38 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'Enter contribution guidelines.',
+        message: 'List your collaborators',
         name: 'credits',
+    },
+    {
+        type: 'list',
+        message: 'Choose a license',
+        choices: licenses,
+        name: 'license',
+    },
+    {
+        type: 'input',
+        message: 'Enter contribution guidelines.',
+        name: 'contribute',
     },
     {
         type: 'input',
         message: 'Enter test instructions.',
         name: 'tests',
     },
-    {
-        type: 'list',
-        message: 'question 7',
-        choices: licenses,
-        name: 'license',
-    }
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile('./Generated-README/README.md', markdown, (err) =>
+      err ? console.log(err) : console.log('Success!')
+)}
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer
-        .prompt(questions);
+        .prompt(questions)
+        .then(generateMarkdown);
 }
 
 // Function call to initialize app
