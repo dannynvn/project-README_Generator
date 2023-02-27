@@ -1,32 +1,23 @@
 const fs = require('fs');
 
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+let licenseSection = '';
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
-
-// TODO: Create a function to generate markdown for README
+//generates markdown for README
 function generateMarkdown(data) {
     const markdown = `# ${data.title}<br>
 
 ## Description
 ${data.description}
 
-
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
-- [License](#license)
 - [How to contribute](#how-to-contribute)
 - [Tests](#tests)
+- [Questions](#questions)
+- [License](#license)
 
 
 ## Installation
@@ -41,10 +32,6 @@ ${data.usage}
 ${data.credits}
 
 
-## License
-${data.license}
-
-
 ## How to contribute
 ${data.contribute}
 
@@ -52,11 +39,42 @@ ${data.contribute}
 ## Tests
 ${data.tests}
 
+
+## Questions?
+If you have any questions, you can reach me by email: ${data.email}
+<br>
+You can also visit my github profile at: https://github.com/${data.username}
+
+
+## License
+
+
+
 `;
 
-  fs.writeFile('./Generated-README/README.md', markdown, (err) =>
-        err ? console.log(err) : console.log('Success!')
-  );
+    fs.writeFile('./Generated-README/README.md', markdown, (err) =>
+          err ? console.log(err) : console.log('README Generated!')
+    );
+
+    function renderLicenseSection()  {
+      if (data.license != 'NO LICENSE') {
+        console.log('generate license')
+        let licenseSection = `This application is covered under the following license: ${data.license}`
+
+
+        fs.appendFile('./Generated-README/README.md', licenseSection, (err) =>
+        err ? console.log(err) : console.log('Licensing added!')
+        );
+      }  else {
+        console.log('no license');
+        fs.appendFile('./Generated-README/README.md', licenseSection, (err) =>
+        err ? console.log(err) : console.log('No license indicated')
+      )};
+    }
+
+    renderLicenseSection();
+
+    
 }
 
 module.exports = generateMarkdown;
